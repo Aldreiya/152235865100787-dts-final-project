@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import * as React from 'react';
-import { Box, Button, Divider, IconButton, Input, TableHead, Typography } from "@mui/material";
+import { Box, Button, Divider, IconButton, Input, Link, TableHead, Typography } from "@mui/material";
 import coinpaprika from '../apis/coinpaprika';
 import PropTypes from 'prop-types';
 import { useTheme } from '@mui/material/styles';
@@ -8,7 +8,6 @@ import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
-import TableFooter from '@mui/material/TableFooter';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
@@ -84,14 +83,12 @@ TablePaginationActions.propTypes = {
 
 const Content = () => {
     const [movies, setMovies] = useState([]);
-    const [moviesReady, setMoviesReady] = useState(false);
 
     useEffect(() => {
         const fetchMovies = async () => {
             try {
                 const fetchedMovies = await coinpaprika.get(`coins`);
                 setMovies(fetchedMovies.data);
-                setMoviesReady(true);
             } catch (error) {
                 console.log(error);
             }
@@ -156,7 +153,7 @@ const Content = () => {
                                     {row.rank}
                                 </TableCell>
                                 <TableCell scope="row">
-                                    {row.name}
+                                    <Link href="#" >{row.name}</Link>
                                 </TableCell>
                                 <TableCell style={{ width: 160 }}>
                                     {row.symbol}
