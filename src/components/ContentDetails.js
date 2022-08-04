@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Box, Button, Link } from "@mui/material";
+import { Box, Link } from "@mui/material";
 import { useParams } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
 import { useEffect, useState } from 'react';
@@ -21,7 +21,7 @@ const ContentDetails = () => {
     }
 
     fetchMovies();
-  }, []);
+  }, [params.id]);
 
   return (
     <Box class="content">
