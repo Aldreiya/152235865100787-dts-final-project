@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import * as React from 'react';
-import { Box, Divider, IconButton, Input, Link, TableHead, Typography } from "@mui/material";
+import { Box, Button, Divider, IconButton, Input, Link, TableHead, Typography } from "@mui/material";
 import coinpaprika from '../apis/coinpaprika';
 import PropTypes from 'prop-types';
 import { useTheme } from '@mui/material/styles';
@@ -86,10 +86,6 @@ TablePaginationActions.propTypes = {
 const Content = () => {
     const [movies, setMovies] = useState([]);
 
-    const [search, setSearch] = React.useState('');
-    const handleSearch = (event) => {
-        setSearch(event.target.value);
-    };
 
     useEffect(() => {
         const fetchMovies = async () => {
@@ -112,7 +108,7 @@ const Content = () => {
     const emptyRows =
         page > 0 ? Math.max(0, (1 + page) * rowsPerPage - movies.length) : 0;
 
-    const handleChangePage = (event, newPage) => {
+    const handleChangePage = (_event, newPage) => {
         setPage(newPage);
     };
 
@@ -125,13 +121,21 @@ const Content = () => {
     const onDetailsClick = (id) => {
         navigate(`/coin-details/${id}`);
     }
-    // console.log(search.length);
+
+    const searchData = (e) => {
+
+        e.preventDefault();
+        console.log('The link was clicked.');
+    }
 
     return (
         <Box class='content'>
             <Box sx={{ mb: 1, display: 'flex', justifyContent: 'space-between' }}>
                 <Typography variant="h4" >Cryptocurrencies by Market Cap</Typography>
-                <Input type="search" placeholder="ex: Bitcoin" onChange={handleSearch} />
+                <Box>
+                    <Input type="text" placeholder="ex: Bitcoin" />
+                    <Button onClick={searchData}>Search</Button>
+                </Box>
             </Box>
 
             <Divider variant="middle" sx={{ mb: 2 }} />
