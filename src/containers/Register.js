@@ -48,6 +48,7 @@ const Register = () => {
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
+          p: 2
         }}
       >
         <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
@@ -98,8 +99,8 @@ const Register = () => {
             </Grid>
           </Grid>
         </Box>
+        <Copyright sx={{ mt: 5, mb: 3 }} />
       </Box>
-      <Copyright sx={{ mt: 5 }} />
     </Container>
   );
 }

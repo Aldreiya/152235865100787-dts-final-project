@@ -47,13 +47,14 @@ const Login = () => {
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
+                    p: 2
                 }}
             >
                 <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
                     <LockOutlinedIcon />
                 </Avatar>
                 <Typography component="h1" variant="h5">
-                Login
+                    Login
                 </Typography>
                 <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
                     <TextField
@@ -93,8 +94,8 @@ const Login = () => {
                         </Grid>
                     </Grid>
                 </Box>
+                <Copyright sx={{ mt: 5, mb: 3 }} />
             </Box>
-            <Copyright sx={{ mt: 5 }} />
         </Container>
     );
 }
