@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import * as React from 'react';
-import { Box, Button, Divider, IconButton, Input, Link, TableHead, Typography } from "@mui/material";
+import { Box, Divider, IconButton, Input, Link, TableHead, Typography } from "@mui/material";
 import coinpaprika from '../apis/coinpaprika';
 import PropTypes from 'prop-types';
 import { useTheme } from '@mui/material/styles';
@@ -121,20 +121,18 @@ const Content = () => {
     const onDetailsClick = (id) => {
         navigate(`/coin-details/${id}`);
     }
-
-    const searchData = (e) => {
-
-        e.preventDefault();
-        console.log('The link was clicked.');
-    }
+    const [searchedVal, setSearchedVal] = useState("");
 
     return (
         <Box class='content'>
             <Box sx={{ mb: 1, display: 'flex', justifyContent: 'space-between' }}>
                 <Typography variant="h4" >Cryptocurrencies by Market Cap</Typography>
                 <Box>
-                    <Input type="text" placeholder="ex: Bitcoin" />
-                    <Button onClick={searchData}>Search</Button>
+                    <Input
+                        type="search"
+                        placeholder="ex: Bitcoin"
+                        onChange={(e) => setSearchedVal(e.target.value)}
+                    />
                 </Box>
             </Box>
 
@@ -162,10 +160,15 @@ const Content = () => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {(rowsPerPage > 0
+                        {((rowsPerPage > 0
                             ? movies.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                             : movies
-                        ).map((row) => (
+                        ).filter((item) =>
+                            !searchedVal.length || item.name
+                                .toString()
+                                .toLowerCase()
+                                .includes(searchedVal.toString().toLowerCase())
+                        )).map((row) => (
                             <TableRow key={row.name}>
                                 <TableCell scope="row" style={{ width: 50 }}>
                                     {row.rank}
