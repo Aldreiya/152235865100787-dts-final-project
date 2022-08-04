@@ -86,6 +86,11 @@ TablePaginationActions.propTypes = {
 const Content = () => {
     const [movies, setMovies] = useState([]);
 
+    const [search, setSearch] = React.useState('');
+    const handleSearch = (event) => {
+        setSearch(event.target.value);
+    };
+
     useEffect(() => {
         const fetchMovies = async () => {
             try {
@@ -120,12 +125,7 @@ const Content = () => {
     const onDetailsClick = (id) => {
         navigate(`/coin-details/${id}`);
     }
-
-    const [search, setSearch] = React.useState('');
-    const handleSearch = (event) => {
-        setSearch(event.target.value);
-    };
-    console.log(search.length);
+    // console.log(search.length);
 
     return (
         <Box class='content'>
@@ -136,7 +136,7 @@ const Content = () => {
 
             <Divider variant="middle" sx={{ mb: 2 }} />
 
-            
+
 
             <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
@@ -158,8 +158,7 @@ const Content = () => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-
-                        {(rowsPerPage > 0 
+                        {(rowsPerPage > 0
                             ? movies.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                             : movies
                         ).map((row) => (
