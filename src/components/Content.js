@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import * as React from 'react';
-import { Box, Button, Divider, IconButton, Input, Link, TableHead, Typography } from "@mui/material";
+import { Box, Divider, IconButton, Input, Link, TableHead, Typography } from "@mui/material";
 import coinpaprika from '../apis/coinpaprika';
 import PropTypes from 'prop-types';
 import { useTheme } from '@mui/material/styles';
@@ -19,6 +19,7 @@ import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
+import { useNavigate } from 'react-router-dom';
 
 function TablePaginationActions(props) {
     const theme = useTheme();
@@ -81,6 +82,7 @@ TablePaginationActions.propTypes = {
     rowsPerPage: PropTypes.number.isRequired,
 };
 
+
 const Content = () => {
     const [movies, setMovies] = useState([]);
 
@@ -114,16 +116,28 @@ const Content = () => {
         setPage(0);
     };
 
-    // console.log(movies);
+    let navigate = useNavigate();
+    const onDetailsClick = (id) => {
+        navigate(`/coin-details/${id}`);
+    }
+
+    const [search, setSearch] = React.useState('');
+    const handleSearch = (event) => {
+        setSearch(event.target.value);
+    };
+    console.log(search.length);
+
     return (
         <Box class='content'>
-            <Box sx={{ mb: 1, display: 'flex', alignItems: 'center' }}>
+            <Box sx={{ mb: 1, display: 'flex', justifyContent: 'space-between' }}>
                 <Typography variant="h4" >Cryptocurrencies by Market Cap</Typography>
-                <Input type="text" placeholder="ex: Bitcoin"></Input>
-                <Button>Search</Button>
+                <Input type="search" placeholder="ex: Bitcoin" onChange={handleSearch} />
             </Box>
 
             <Divider variant="middle" sx={{ mb: 2 }} />
+
+            
+
             <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
                     <TableHead>
@@ -144,7 +158,8 @@ const Content = () => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {(rowsPerPage > 0
+
+                        {(rowsPerPage > 0 
                             ? movies.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                             : movies
                         ).map((row) => (
@@ -153,7 +168,7 @@ const Content = () => {
                                     {row.rank}
                                 </TableCell>
                                 <TableCell scope="row">
-                                    <Link href="#" >{row.name}</Link>
+                                    <Link onClick={() => onDetailsClick(row.id)}>{row.name}</Link>
                                 </TableCell>
                                 <TableCell style={{ width: 160 }}>
                                     {row.symbol}

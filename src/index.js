@@ -11,6 +11,9 @@ import PrivateComponent from './components/PrivateComponent';
 import Login from './containers/Login';
 import NotFound from './containers/NotFound';
 import Register from './containers/Register';
+import Navbar from './components/Navbar';
+import ContentDetails from './components/ContentDetails';
+import Footer from './components/Footer';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -23,6 +26,13 @@ root.render(
           </PrivateComponent>
         }>
         </Route>
+        <Route path="coin-details/:id" element={
+            <PrivateComponent>
+              <Navbar />
+              <ContentDetails />
+              <Footer/>
+            </PrivateComponent>
+          } />
         <Route path="login" element={
           <PrivateComponent loginOnly={false}>
             <Login />

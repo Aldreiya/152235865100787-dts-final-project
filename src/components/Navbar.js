@@ -12,9 +12,12 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
+import { Link } from '@mui/material';
+import { signOut } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
 
+import { auth } from '../config/firebase';
 const pages = [];
-const settings = ['Logout'];
 
 const Navbar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -35,6 +38,15 @@ const Navbar = () => {
     setAnchorElUser(null);
   };
 
+  const navigate = useNavigate();
+  const onLogout = async () => {
+    try {
+      await signOut(auth);
+      navigate("/login");
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -147,11 +159,9 @@ const Navbar = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+                <MenuItem >
+                  <Button onClick={onLogout} textAlign="center">Logout</Button>
                 </MenuItem>
-              ))}
             </Menu>
           </Box>
         </Toolbar>
