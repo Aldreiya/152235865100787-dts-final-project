@@ -5,7 +5,13 @@ html{
 .App {
   
 }
-
+.login,.register{
+  border-radius: 5px;
+  background-color: #fff;
+  width: 30%;
+  margin:auto;
+  color: #000;
+}
 .content{
   display: block;
   margin: auto;

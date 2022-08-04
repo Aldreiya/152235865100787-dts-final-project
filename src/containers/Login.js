@@ -40,14 +40,13 @@ const Login = () => {
     };
 
     return (
-        <Container component="main" maxWidth="xs" sx={{ bgcolor:'#3f3f3f', borderRadius:'5px'}}>
+        <Container class="login">
             <Box
                 sx={{
                     mt: 10,
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
-                    color: 'white'
                 }}
             >
                 <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
